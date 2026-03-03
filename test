@@ -244,6 +244,9 @@ function Alc:NewWindow(WindowDescription,WindowLogo)
 	Frame.SizeConstraint = Enum.SizeConstraint.RelativeYY
 	Frame.ClipsDescendants = true
 
+	TweenService:Create(Frame,TweenInfo.new(1.5),{Size = Alc.Config["UI Size"]}):Play()
+
+    
 local Image = Instance.new("ImageLabel")
 Image.Name = "FrameImage"
 Image.Parent = Frame
@@ -254,7 +257,6 @@ Image.BackgroundTransparency = 1
 Image.Image = "rbxassetid://116422175458617"
 Image.SizeConstraint = Enum.SizeConstraint.RelativeYY
 
-	TweenService:Create(Frame,TweenInfo.new(1.5),{Size = Alc.Config["UI Size"]}):Play()
 
 	UICorner.Parent = Frame
 
@@ -475,7 +477,7 @@ end)
 
 local StatsButton = Instance.new("ImageButton")
 StatsButton.Parent = LowerBar
-StatsButton.Size = UDim2.new(0.05, 0, 0.4, 0)
+StatsButton.Size = UDim2.new(0.04, 0, 0.4, 0)
 StatsButton.Position = UDim2.new(0.93, 0, 0.4, 0)
 StatsButton.AnchorPoint = Vector2.new(0.5, 0.5)
 StatsButton.BackgroundTransparency = 1
@@ -2337,7 +2339,7 @@ Text.TextColor3 = Color3.fromRGB(255, 255, 255)
                     OverlayPanel.Parent = screenGui or Dropdown
                     OverlayPanel.BackgroundColor3 = Color3.fromRGB(22, 22, 28)
                     OverlayPanel.BorderSizePixel = 0
-                    OverlayPanel.Size = UDim2.new(0, 200, 0, math.min(#option * 46 + 8, 220))
+                    OverlayPanel.Size = UDim2.new(0, 180, 0, math.min(#option * 46 + 8, 220))
                     OverlayPanel.Visible = false
                     OverlayPanel.ZIndex = 100
                     OverlayPanel.ClipsDescendants = true
@@ -2389,13 +2391,21 @@ Text.TextColor3 = Color3.fromRGB(255, 255, 255)
                     UIPadding.PaddingTop = UDim.new(0, 4)
                     UIPadding.PaddingBottom = UDim.new(0, 4)
 
-                    -- Helper: position the overlay near the trigger button
-                    local function positionOverlay()
-                        local absPos = Dropdown.AbsolutePosition
-                        local absSize = Dropdown.AbsoluteSize
-                        OverlayPanel.Position = UDim2.new(0, absPos.X + absSize.X + 6, 0, absPos.Y)
-                    end
+local LeftOffset = 213 -- increase this to move more left
 
+local function positionOverlay()
+    task.wait()
+
+    local absPos = Dropdown.AbsolutePosition
+    local absSize = Dropdown.AbsoluteSize
+
+    OverlayPanel.Position = UDim2.new(
+        0,
+        absPos.X + absSize.X - LeftOffset,
+        0,
+        absPos.Y
+    )
+end
                     -- Helper: open/close the overlay
                     local function openOverlay()
                         positionOverlay()
@@ -3061,7 +3071,7 @@ end)
 Home_Left:AddDropdown({
     Name = "Graphics Quality",
     Description = "Adjust graphics settings",
-    option = { "Low", "Medium", "High", "Ultra" },
+    option = { "Low", "Medium", "High", "Ultra", "High", "Ultra", "High", "Ultra", "High", "Ultra", "High", "Ultra", "High", "Ultra", "High", "Ultra", "High", "Ultra", "High", "Ultra", "High", "Ultra", "High", "Ultra", "High", "Ultra", "High", "Ultra", "High", "Ultra", "High", "Ultra", "High", "Ultra", "High", "Ultra", "High", "Ultra", "High", "Ultra", "High", "Ultra", "High", "Ultra", "High", "Ultra", "High", "Ultra", "High", "Ultra", "High", "Ultra", "High", "Ultra", "High", "Ultra" },
     default = "High",
     callback = function(selectedOption)
         print("Selected graphics quality:", selectedOption)
